@@ -3,7 +3,7 @@ import { Aluno } from "../models/Aluno";
 
 export const listarAlunos = async (req: Request, res: Response) => {
     const alunos = await Aluno.findAll()
-    return res.json(alunos);
+     res.json(alunos);
 };
 
 export const cadastrarAluno = async (req: Request, res: Response) => {
