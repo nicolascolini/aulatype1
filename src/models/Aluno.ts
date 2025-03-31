@@ -42,6 +42,7 @@ matricula: {
 
     sequelize,
     tableName: "alunos",
-    timestamps: false,
+    timestamps: true,
+    paranoid: true,
 }
 );
