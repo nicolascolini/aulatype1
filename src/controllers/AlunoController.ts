@@ -1,5 +1,7 @@
 import { Request, Response } from "express";
+import { request } from "http";
 import { Aluno } from "../models/Aluno";
+import server from "../server";
 
 export const listarAlunos = async (req: Request, res: Response) => {
     const alunos = await Aluno.findAll()
@@ -56,3 +58,5 @@ return
         
          res.status(404).json({error: "Aluno não encontrado"});
     };
+
+    
