@@ -1,5 +1,6 @@
 import { Model, DataTypes} from "sequelize";
 import { sequelize } from "../instances/mysql";
+import { Turma } from './Turma';
 
 export class Aluno extends Model {
     public id!: number;
@@ -11,12 +12,14 @@ export class Aluno extends Model {
 Aluno.init (
     {
 
-id: {
-
-    type: DataTypes.INTEGER, 
-    primaryKey: true,
-    autoIncrement: true,
-},
+        turmaId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'turmas',
+                key: 'id'
+            }
+        },
 
 nome: {
     type: DataTypes.STRING,

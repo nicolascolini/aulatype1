@@ -11,20 +11,20 @@ export const getProfessores = async (_req: Request, res: Response) => {
   res.json(professores);
 };
 
-export const getProfessorById = async (req: Request, res: Response) => {
+export const getProfessorById = async (req: Request, res: Response): Promise<any> => {
   const professor = await Professor.findByPk(req.params.id);
   if (!professor) return res.status(404).json({ error: 'Professor não encontrado' });
   res.json(professor);
 };
 
-export const updateProfessor = async (req: Request, res: Response) => {
+export const updateProfessor = async (req: Request, res: Response): Promise<any> => {
   const professor = await Professor.findByPk(req.params.id);
   if (!professor) return res.status(404).json({ error: 'Professor não encontrado' });
   await professor.update(req.body);
   res.json(professor);
 };
 
-export const deleteProfessor = async (req: Request, res: Response) => {
+export const deleteProfessor = async (req: Request, res: Response): Promise<any> => {
   const professor = await Professor.findByPk(req.params.id);
   if (!professor) return res.status(404).json({ error: 'Professor não encontrado' });
   await professor.destroy();

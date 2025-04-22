@@ -11,20 +11,20 @@ export const getPresencas = async (_req: Request, res: Response) => {
   res.json(presencas);
 };
 
-export const getPresencaById = async (req: Request, res: Response) => {
+export const getPresencaById = async (req: Request, res: Response): Promise<any> => {
   const presenca = await Presenca.findByPk(req.params.id);
   if (!presenca) return res.status(404).json({ error: 'Presença não encontrada' });
   res.json(presenca);
 };
 
-export const updatePresenca = async (req: Request, res: Response) => {
+export const updatePresenca = async (req: Request, res: Response): Promise<any> => {
   const presenca = await Presenca.findByPk(req.params.id);
   if (!presenca) return res.status(404).json({ error: 'Presença não encontrada' });
   await presenca.update(req.body);
   res.json(presenca);
 };
 
-export const deletePresenca = async (req: Request, res: Response) => {
+export const deletePresenca = async (req: Request, res: Response): Promise<any> => {
   const presenca = await Presenca.findByPk(req.params.id);
   if (!presenca) return res.status(404).json({ error: 'Presença não encontrada' });
   await presenca.destroy();

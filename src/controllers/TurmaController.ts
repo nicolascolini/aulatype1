@@ -11,20 +11,20 @@ export const getTurmas = async (_req: Request, res: Response) => {
   res.json(turmas);
 };
 
-export const getTurmaById = async (req: Request, res: Response) => {
+export const getTurmaById = async (req: Request, res: Response): Promise<any> => {
   const turma = await Turma.findByPk(req.params.id);
   if (!turma) return res.status(404).json({ error: 'Turma não encontrada' });
   res.json(turma);
 };
 
-export const updateTurma = async (req: Request, res: Response) => {
+export const updateTurma = async (req: Request, res: Response): Promise<any> => {
   const turma = await Turma.findByPk(req.params.id);
   if (!turma) return res.status(404).json({ error: 'Turma não encontrada' });
   await turma.update(req.body);
   res.json(turma);
 };
 
-export const deleteTurma = async (req: Request, res: Response) => {
+export const deleteTurma = async (req: Request, res: Response): Promise<any> => {
   const turma = await Turma.findByPk(req.params.id);
   if (!turma) return res.status(404).json({ error: 'Turma não encontrada' });
   await turma.destroy();
