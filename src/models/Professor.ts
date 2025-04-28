@@ -1,10 +1,9 @@
-import { Model, DataTypes } from "sequelize";
+import { DataTypes, Model } from 'sequelize';
 import { sequelize } from "../instances/mysql";
 
 export class Professor extends Model {
   public id!: number;
   public nome!: string;
-  public email!: string;
 }
 
 Professor.init(
@@ -18,15 +17,11 @@ Professor.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
   },
   {
     sequelize,
-    tableName: "professores",
+    modelName: 'Professor',
+    tableName: 'professores',
     timestamps: false,
   }
 );

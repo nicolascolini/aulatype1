@@ -4,7 +4,6 @@ import { sequelize } from "../instances/mysql";
 export class Turma extends Model {
   public id!: number;
   public nome!: string;
-  public cursoId!: number;
 }
 
 Turma.init(
@@ -18,14 +17,11 @@ Turma.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    cursoId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   },
   {
     sequelize,
-    tableName: "turmas",
+    modelName: 'Turma',
+    tableName: 'turmas',
     timestamps: false,
   }
 );

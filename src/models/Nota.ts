@@ -3,9 +3,10 @@ import { sequelize } from "../instances/mysql";
 
 export class Nota extends Model {
   public id!: number;
-  public alunoId!: number;
-  public disciplinaId!: number;
-  public valor!: number;
+  public aluno_id!: number;
+  public disciplina_id!: number;
+  public nota!: number;
+  public data_avaliacao!: Date;
 }
 
 Nota.init(
@@ -15,22 +16,27 @@ Nota.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    alunoId: {
+    aluno_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    disciplinaId: {
+    disciplina_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    valor: {
-      type: DataTypes.FLOAT,
+    nota: {
+      type: DataTypes.DECIMAL(5, 2),
+      allowNull: false,
+    },
+    data_avaliacao: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
   },
   {
     sequelize,
-    tableName: "notas",
-    timestamps: false,
+    modelName: 'Nota',
+    tableName: 'notas',
+    timestamps: true,
   }
 );

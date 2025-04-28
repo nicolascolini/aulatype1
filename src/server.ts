@@ -6,8 +6,8 @@ import apiRoutes from './routes/routes';
 import { conectarBanco } from './instances/mysql';
 import "./models/associations";
 
-dotenv.config();
 
+dotenv.config();
 
 const server = express();
 
@@ -35,7 +35,7 @@ const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
 server.use(errorHandler);
 
 // Iniciar o servidor e exibir a porta no console
-const port = process.env.PORT || 3000; // Defina uma porta padrão se não estiver no .env
+const port = process.env.PORT || 5000; // Defina uma porta padrão se não estiver no .env
 server.listen(port, () => {
     console.log(`Servidor rodando na porta ${port}`);
 });

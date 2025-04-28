@@ -49,3 +49,5 @@ export const listarDisciplinas = async (req: Request, res: Response) => {
 //     res.status(500).json({message: "Erro ao atualizar Disciplina", error});
 // }
 // };
+
+

@@ -1,36 +1,25 @@
-import { Aluno } from "./Aluno";
-import { Disciplina } from "./Disciplina";
-import { AlunoDisciplina } from "./AlunoDisciplina";
-import { Nota } from "./Nota";
-import { Presenca } from "./Presenca";
-import { Professor } from "./Professor";
-import { Turma } from "./Turma";
+import { Aluno } from './Aluno';
+import { Disciplina } from './Disciplina';
+import { Professor } from './Professor';
+import { Turma } from './Turma';
+import { Nota } from './Nota';
+import { Presenca } from './Presenca';
 
-// Relação N:N entre Aluno e Disciplina
-Aluno.belongsToMany(Disciplina, {
-    through: AlunoDisciplina,
-    foreignKey: "alunoId"
-});
+// Relacionamentos
+Aluno.belongsTo(Turma, { foreignKey: 'turma_id' });
+Turma.hasMany(Aluno, { foreignKey: 'turma_id' });
 
-Disciplina.belongsToMany(Aluno, {
-    through: AlunoDisciplina,
-    foreignKey: "disciplinaId"
-});
+Disciplina.belongsTo(Professor, { foreignKey: 'professor_id' });
+Professor.hasMany(Disciplina, { foreignKey: 'professor_id' });
 
-Nota.belongsTo(Aluno, { foreignKey: "alunoId" });
-Nota.belongsTo(Disciplina, { foreignKey: "disciplinaId" });
-Aluno.hasMany(Nota, { foreignKey: "alunoId" });
-Disciplina.hasMany(Nota, { foreignKey: "disciplinaId" });
+Nota.belongsTo(Aluno, { foreignKey: 'aluno_id' });
+Aluno.hasMany(Nota, { foreignKey: 'aluno_id' });
 
-Presenca.belongsTo(Aluno, { foreignKey: "alunoId" });
-Presenca.belongsTo(Disciplina, { foreignKey: "disciplinaId" });
-Aluno.hasMany(Presenca, { foreignKey: "alunoId" });
-Disciplina.hasMany(Presenca, { foreignKey: "disciplinaId" });
+Nota.belongsTo(Disciplina, { foreignKey: 'disciplina_id' });
+Disciplina.hasMany(Nota, { foreignKey: 'disciplina_id' });
 
-Turma.hasMany(Aluno, { foreignKey: "turmaId" });
-Aluno.belongsTo(Turma, { foreignKey: "turmaId" });
+Presenca.belongsTo(Aluno, { foreignKey: 'aluno_id' });
+Aluno.hasMany(Presenca, { foreignKey: 'aluno_id' });
 
-Professor.hasMany(Disciplina, { foreignKey: "professorId" });
-Disciplina.belongsTo(Professor, { foreignKey: "professorId" });
-
-console.log("Relações entre models configuradas");
+Presenca.belongsTo(Disciplina, { foreignKey: 'disciplina_id' });
+Disciplina.hasMany(Presenca, { foreignKey: 'disciplina_id' });

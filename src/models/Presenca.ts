@@ -3,10 +3,10 @@ import { sequelize } from "../instances/mysql";
 
 export class Presenca extends Model {
   public id!: number;
-  public alunoId!: number;
-  public disciplinaId!: number;
+  public aluno_id!: number;
+  public disciplina_id!: number;
   public data!: Date;
-  public status!: boolean;
+  public status!: string;
 }
 
 Presenca.init(
@@ -16,26 +16,27 @@ Presenca.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    alunoId: {
+    aluno_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    disciplinaId: {
+    disciplina_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     data: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     status: {
-      type: DataTypes.BOOLEAN,
+      type: DataTypes.ENUM('presente', 'faltou'),
       allowNull: false,
     },
   },
   {
     sequelize,
-    tableName: "presencas",
-    timestamps: false,
+    modelName: 'Presenca',
+    tableName: 'presencas',
+    timestamps: true,
   }
 );

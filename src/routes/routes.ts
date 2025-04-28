@@ -7,6 +7,8 @@ import * as ProfessorController from '../controllers/ProfessorController';
 import * as TurmaController from '../controllers/TurmaController';
 import * as PresencaController from '../controllers/PresencaController';
 import * as apiController from '../controllers/apiController';
+import * as NotaController from '../controllers/NotaController';
+
 
 const router = Router();
 
