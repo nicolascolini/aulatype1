@@ -1,4 +1,4 @@
-import express, { Request, Response, ErrorRequestHandler } from 'express';
+import express, { Request, Response, NextFunction, ErrorRequestHandler } from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import cors from 'cors';
