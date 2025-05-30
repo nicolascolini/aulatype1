@@ -7,3 +7,17 @@ npm run start-dev
 4º commit: Atualização Melhorando as Funções (atividade)
 
 5/6º commit: Introduzindo atualizar / deletar aluno (atividade 01/04)
+
+commit 21/04: Atividade API Escola
+
+Atividade 02/06:
+
+Instale o Node.JS, tenha a conta no MySQL
+npm install (instala as dependências)
+altere o .env de acordo com o seu banco de dados
+npm rum migrate (conecta com o banco de dados)
+crie as tabelas no MySQL com os campos solicitados
+Dê o npm run start --dev
+Construa as models, routes e controllers para o sistema
+Construa os middlewares, e instale o pacote de tokens e bcrypt
+Construir tela frontend e conectá-la com o backend.
