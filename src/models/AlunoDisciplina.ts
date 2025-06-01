@@ -10,21 +10,29 @@ export class AlunoDisciplina extends Model {
 }
 
 AlunoDisciplina.init(
-{
+  {
     alunoId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: Disciplina,
-            key: "id",
-        },
-        onDelete: "CASCADE",
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'aluno',  // ou Aluno
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
     },
-
-},
-{
+    disciplinaId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'disciplina',  // ou Disciplina
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+    },
+  },
+  {
     sequelize,
     tableName: "aluno_disciplinas",
     timestamps: false,
-}
+  }
 );

@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction, ErrorRequestHandler } from 'e
 import path from 'path';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import apiRoutes from './routes/routes';
+import router from './routes/routes';
 import { conectarBanco } from './instances/mysql';
 import "./models/associations";
 
@@ -20,10 +20,10 @@ server.use(express.static(path.join(__dirname, '../public')));
 server.use(express.json()); // Usando JSON
 
 // Definir as rotas da API
-server.use(apiRoutes);
+server.use(router);
 
 // Endpoint para caso o usuário acesse um caminho inexistente
-server.use((req: Request, res: Response) => {
+server.use('*', (req, res) => {
     res.status(404).json({ error: 'Endpoint não encontrado.' });
 });
 

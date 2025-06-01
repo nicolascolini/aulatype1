@@ -1,34 +1,38 @@
-import { Model, DataTypes} from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../instances/mysql";
-import { Professor } from './Professor';
 
 export class Disciplina extends Model {
-
-    public id!: number;
-    public nome!: string;
+  public id!: number;
+  public nome!: string;
+  public professorId!: number | null;
 }
 
 Disciplina.init(
-
   {
-
-    ProfessorId: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-
     nome: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        unique: true,
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    professorId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'professores',
+        key: 'id',
+      },
+      onUpdate: 'CASCADE',
+      onDelete: 'SET NULL',
+    },
   },
-
-},
-{
-
+  {
     sequelize,
     tableName: "disciplinas",
     timestamps: false,
-}
+  }
 );
