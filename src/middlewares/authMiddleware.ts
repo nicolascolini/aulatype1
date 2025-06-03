@@ -16,11 +16,12 @@ declare module 'express' {
 }
 
 // Middleware para autenticar o token JWT
-export const autenticarToken = (req: Request, res: Response, next: NextFunction) => {
+export const autenticarToken = (req: Request, res: Response, next: NextFunction): void => {
   const authHeader = req.headers.authorization;
 
   if (!authHeader) {
-    return res.status(401).json({ mensagem: 'Token não fornecido' });
+    res.status(401).json({ mensagem: 'Token não fornecido' });
+    return;
   }
 
   const token = authHeader.split(' ')[1]; // Exemplo: "Bearer <token>"
@@ -30,16 +31,16 @@ export const autenticarToken = (req: Request, res: Response, next: NextFunction)
     req.usuario = decoded;
     next();
   } catch (error) {
-    return res.status(403).json({ mensagem: 'Token inválido ou expirado' });
+    res.status(403).json({ mensagem: 'Token inválido ou expirado' });
+    return;
   }
 };
 
 // Middleware para restringir o acesso apenas a professores
-export const apenasProfessores = (req: Request, res: Response, next: NextFunction) => {
+export const apenasProfessores = (req: Request, res: Response, next: NextFunction): void => {
   if (req.usuario?.tipo !== 'professor') {
-    return res.status(403).json({ mensagem: 'Acesso restrito aos professores' });
+    res.status(403).json({ mensagem: 'Acesso restrito aos professores' });
+    return;
   }
   next();
-
-  
 };

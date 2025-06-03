@@ -2,35 +2,31 @@ import { Request, Response } from "express";
 import { Disciplina } from "../models/Disciplina";
 import { emitWarning } from "process";
 
-export const listarDisciplinas = async (req: Request, res: Response) => {
-
+export const listarDisciplinas = async (req: Request, res: Response): Promise<any> => {
     const disciplinas = await Disciplina.findAll();
-    res.json(disciplinas);
-}
+    return res.json(disciplinas);
+};
 
-    export const cadastrarDisciplina = async (req: Request, res: Response) => {
+export const cadastrarDisciplina = async (req: Request, res: Response): Promise<any> => {
+    const { nome } = req.body;
 
-        const { nome } = req.body;
+    if (nome) {
+        const disciplinaExistente = await Disciplina.findOne({ where: { nome } });
 
-        if (nome) {
-            let disciplinaExistente = await Disciplina.findOne({ where: {nome}});
-            if (!disciplinaExistente) {
-                let novaDisciplina = await Disciplina.create({nome});
+        if (!disciplinaExistente) {
+            const novaDisciplina = await Disciplina.create({ nome });
 
-                res.status(201);
-                res.json({
-                    message: "Disciplina cadastrada com sucesso",
-                    novaDisciplina
-                });
+            return res.status(201).json({
+                message: "Disciplina cadastrada com sucesso",
+                novaDisciplina
+            });
+        } else {
+            return res.status(400).json({ error: "Nome da disciplina já existe" });
+        }
+    }
 
-            } else {
-                res.status(400).json({error: "Nome da disciplina já existe"});
-
-            }
-            }
-   
-    res.status(400).json({error: "Nome da disciplina não enviado."});
-}
+    return res.status(400).json({ error: "Nome da disciplina não enviado." });
+};
 
 // export const atualizarDisciplina = async (req: Request, res: Response) => {
 // try {

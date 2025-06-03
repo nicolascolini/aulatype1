@@ -48,8 +48,8 @@ router.get('/listarTodasDisciplinas', DisciplinaController.listarDisciplinas);
 router.post('/cadastrarDisciplina', DisciplinaController.cadastrarDisciplina);
 
 // Aluno-Disciplina
-router.post("/vincularAlunoADisciplina", AlunoDisciplinaController.vincularAlunoADisciplina);
-router.get("/listarDisciplinasDoAluno/:alunoId", AlunoDisciplinaController.listarDisciplinasDoAluno);
+router.post('/vincularAlunoADisciplina', AlunoDisciplinaController.vincularAlunoADisciplina);
+router.get('/listarDisciplinasDoAluno/:alunoId', AlunoDisciplinaController.listarDisciplinasDoAluno);
 
 // Professor
 router.post('/professores', ProfessorController.createProfessor);

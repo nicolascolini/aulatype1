@@ -4,12 +4,12 @@ import jwt from 'jsonwebtoken';
 import { Aluno } from '../models/Aluno';
 import { Professor } from '../models/Professor';
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<any> => {
   const { identificador, senha } = req.body;
 
   try {
-    let usuario;
-    let tipo;
+    let usuario: any;
+    let tipo: string;
 
     // Tenta encontrar como aluno (matrícula)
     usuario = await Aluno.findOne({ where: { matricula: identificador } });
@@ -25,13 +25,12 @@ export const login = async (req: Request, res: Response) => {
       return res.status(404).json({ mensagem: 'Usuário não encontrado' });
     }
 
-    // Verifica senha
-    const senhaValida = await bcrypt.compare(senha, (usuario as any).senha);
+    const senhaValida = await bcrypt.compare(senha, usuario.senha);
     if (!senhaValida) {
       return res.status(401).json({ mensagem: 'Senha inválida' });
     }
 
-    // Gera token JWT
+    //  token JWT
     const token = jwt.sign(
       {
         id: usuario.id,
